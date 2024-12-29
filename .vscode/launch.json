@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringsecuritylearnApplication<springsecuritylearn>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.brngri.springsecuritylearn.SpringsecuritylearnApplication",
+            "projectName": "springsecuritylearn",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
