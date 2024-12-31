@@ -98,7 +98,7 @@ Body:
 
 #### Listar usuários (GET)
 
-OBS: Apenas o usuário admim tem permissão
+OBS: Apenas o usuário admin tem permissão
 
 URL:
 ```url
