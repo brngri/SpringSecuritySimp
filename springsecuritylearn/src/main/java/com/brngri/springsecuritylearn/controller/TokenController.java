@@ -1,6 +1,8 @@
 package com.brngri.springsecuritylearn.controller;
 
 import java.time.Instant;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brngri.springsecuritylearn.controller.dto.LoginRequest;
 import com.brngri.springsecuritylearn.controller.dto.LoginResponse;
+import com.brngri.springsecuritylearn.entitys.Role;
 import com.brngri.springsecuritylearn.reposiories.UserRepository;
 
 @RestController
@@ -45,11 +48,17 @@ public class TokenController {
         var now = Instant.now();
         var expiresIn = 300L;
 
+        var scopes = user.get().getRoles()
+            .stream()
+            .map(Role::getName)
+            .collect(Collectors.joining(" "));
+
         var claims = JwtClaimsSet.builder()
                     .issuer("mybackend")
                     .subject(user.get().getUserId().toString())
                     .issuedAt(now)
                     .expiresAt(now.plusSeconds(expiresIn))
+                    .claim("scope", scopes)
                     .build();
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
